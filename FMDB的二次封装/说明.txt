@@ -1,0 +1,49 @@
+这是对FMDB的使用进行了封装,使用时需要下载FMDB第三方库
+
+使用类方法来初始化对象会创建一个名字为USERTABLE的表,表中字段是name  age  不满足时自己按照格式进行修改
+
+
+其他的方法中不适用的都一起修改
+
+
+1.先在APPDelegate.m中进行一次初始化用来建数据库和建表
+
+2.在需要用的地方定义属性@property(nonatomic,retain)FMDBManager * Fmangeer;
+
+3.懒加载
+- (FMDBManager *)Fmangeer{
+
+    if (!_Fmangeer) {
+        _Fmangeer=[FMDBManager shareManager];
+        
+    }
+    return _Fmangeer;
+}
+
+4.增加
+    [self.Fmangeer inserIntoTableWithName:@"张三" age:@"11"];
+
+
+5.删除
+    [self.Fmangeer deleteWithName:@"张三"];
+
+6.修改
+    [self.Fmangeer changeAgeWithName:@"李四" newAge:@"55"];
+
+7.查询
+    [self.Fmangeer selectWithName:@"张三"];    //按名字查询年龄
+    [self.Fmangeer selectTableAllInfomation]; //查询所有表中数据
+
+
+
+
+
+
+
+
+
+
+
+
+
+
